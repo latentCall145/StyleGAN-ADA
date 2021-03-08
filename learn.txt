@@ -1,0 +1,19 @@
+Things I've learned from making this: 
+- Use equalized learning rates - pretty yum
+- just use nonsaturating logistic loss, don't use WGAN-GP (I don't know why, but I've never got good results using WGAN-GP and NVIDIA used non-saturating logistic loss and R1 gradient penalty rather than Wasserstein loss and WGAN-GP gradient penalty...)
+  - Nonsaturating loss functions (in practice, add an epsilon inside the logs to prevent NaN errors)
+    - Discriminator: -log(sigmoid(D(x)) - log(1-sigmoid(D(G(z))))
+    - Generator: -log(sigmoid(D(G(z))))
+  - R1 Gradient Penalty: mean(norm(gradient of D(x) with respect to x) for x in batch) / 2
+- Style mixing is a thing
+
+Things I've learned to do from making this:
+- Custom Keras layers (initialization, building kernels without causing weird save errors, using backend utilities to multiply weights with activations and add biases
+  - Apparently the default activation in a Keras Layer is tf.keras.activations.linear and not None which took me a couple of days of troubleshooting to find out
+- He initialization (proper He initialization gain for ReLU with hyperparameter alpha: gain = sqrt((2 / (1 + alpha)) / (number of input features))
+  - alpha = 0 (normal ReLU) -> gain = sqrt(2 / (number of input features)) (correct)
+  - alpha = 1 (Xavier) -> gain = sqrt(1 / (number of input features)) (correct enough)
+  - alpha = 0.2 (custom LeakyReLU) -> gain = sqrt((10 / 6) / (number of input features)) (worked well in training)
+- copying code - sometimes helpful to not try to reinvent the wheel, copied modulated convolution code from NVIDIA, minibatch stdev from StackOverslow, FID code from Machine Learning Mastery
+- Adaptive data augmentation (learned difference between tf.cond, tf.where, tf.scatter_nd)
+- learned tf.gradients instead of tf.GradientTape (tf.gradients are for tf.function, which makes code faster and requires less whitespace)

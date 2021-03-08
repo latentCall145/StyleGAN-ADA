@@ -1,0 +1,1 @@
+this is where you put in input .npy files, use my image_processing repo to generate them from ordinary .jpg/.png images.
