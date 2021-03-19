@@ -1,0 +1,5 @@
+tensorflow==2.4.1
+numpy==1.19.5
+matplotlib==3.3.4
+tqdm==4.56.0
+tensorflow-addons==0.12.1
