@@ -1,5 +1,5 @@
-# StyleGAN_ADAnough
-My implementation of NVIDIA's StyleGAN2_ADA (paper: https://arxiv.org/pdf/2006.06676.pdf).
+# StyleGAN-ADA
+My implementation of NVIDIA's StyleGAN2-ADA (paper: https://arxiv.org/pdf/2006.06676.pdf).
 
 ![Style mixing](/figures/styleMix.png)
 
